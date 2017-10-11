@@ -4,6 +4,7 @@
   "description": "Functional Javascript library",
   "main": "./lib/js/index.js",
   "scripts": {
+    "prepublish": "npm run build-prod",
     "build-dev": "webpack --config ./config/js/webpack.dev.js && webpack --config ./config/ts/webpack.dev.js",
     "build-prod": "webpack --config ./config/js/webpack.prod.js && webpack --config ./config/ts/webpack.prod.js",
     "example-js": "babel-node examples/js/switch-example.js --presets es2015",
