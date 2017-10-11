@@ -1,2 +1,2 @@
 # functional-lib
-Functional Javascript Library
+Functional Javascript library with Typescript support
