@@ -1,17 +1,55 @@
-import { Switch } from '../../lib/ts';
+import { Switch, log, Divider } from '../../lib';
 
-const switcher = new Switch(3)
+
+const parseSwitch = new Switch(3, true)
   .case(() => 9 / 3)
     .do(({ value, pipe, parse }:Switch) => {
-      parse('test');
+      parse('=> parsedValue');
     })
   .case(2)
-    .do((_switch:Switch) => {
-      const value = new String(_switch.value).repeat(25);
-      _switch.pipe(value);
+    .do((switchClass:Switch) => {
+      const divider = { char: switchClass.value, amount: 5 };
+      const value = new Divider(divider);
+      switchClass.pipe(value);
     })
   .else((parse:Function) => {
-    parse('fallback value')
+    parse('fallback value');
   });
 
-console.log('switcher', switcher.value);
+log('log', 'parseSwitch', parseSwitch.value);
+
+
+const pipeSwitch = new Switch(3, true)
+  .case(() => 9 / 3)
+    .do(({ value, pipe, parse }:Switch) => {
+      pipe('=> pipedValue');
+    })
+  .case(2)
+    .do((switchClass:Switch) => {
+      const divider = { char: switchClass.value, amount: 5 };
+      const value = new Divider(divider);
+      switchClass.pipe(value);
+    })
+  .else((parse:Function) => {
+    parse('fallback value');
+  });
+
+log('log', 'pipeSwitch', pipeSwitch.value);
+
+
+const fallbackSwitch = new Switch(10, true)
+.case(() => 9 / 3)
+  .do(({ value, pipe, parse }:Switch) => {
+    pipe('=> pipedValue');
+  })
+.case(2)
+  .do((switchClass:Switch) => {
+    const divider = { char: switchClass.value, amount: 5 };
+    const value = new Divider(divider);
+    switchClass.pipe(value);
+  })
+.else((parse:Function) => {
+  parse('fallback value');
+});
+
+log('log', 'fallbackSwitch', fallbackSwitch.value);

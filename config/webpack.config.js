@@ -1,16 +1,16 @@
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-const entry = (file) => path.resolve(__dirname, `../../src/ts/${file}`);
-const output = (folder) => path.resolve(__dirname, `../../${folder}`);
+const entry = (file) => path.resolve(__dirname, `../src/${file}`);
+const output = (folder) => path.resolve(__dirname, `../${folder}`);
 
-const cleanOptions = { allowExternal: true }
+const cleanOptions = { allowExternal: true };
 
 module.exports = {
   entry: entry('index.ts'),
   output: {
     filename: 'index.js',
-    path: output('lib/ts'),
+    path: output('lib'),
     library: 'functional-lib',
     libraryTarget: 'umd',
     umdNamedDefine: true
@@ -28,6 +28,7 @@ module.exports = {
     extensions: ['.ts', '.tsx']
   },
   plugins: [
-    new CleanWebpackPlugin([output('lib/ts')], cleanOptions)
+    new CleanWebpackPlugin([output('**/tempCodeRunnerFile.*')], cleanOptions),
+    new CleanWebpackPlugin([output('lib')], cleanOptions)
   ]
 }

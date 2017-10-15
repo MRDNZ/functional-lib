@@ -1,14 +1,21 @@
-const unless = (predicate, fn) => !predicate ? fn() : undefined;
-const isFunction = (variable) => (typeof variable === 'function' || variable instanceof Function);
+import { isFunction, unless } from './Functional';
 
 export class Switch {
-  constructor(variable){
+  value:any;
+  variable:any;
+  state:string;
+  predicate:any;
+  condition:any;
+  debug:boolean;
+
+  constructor(variable:any, debug:boolean = false) {
+    this.debug = debug;
     this.value = null;
     this.variable = isFunction(variable) ? variable() : variable;
     this.setState('initialized');
   }
 
-  case(condition){
+  case(condition:any):Switch {
     unless(this.state === 'break', () => {
       unless(this.state === 'pipeline', () => this.setState('pending'));
       this.predicate = this.getPredicate(condition, this.variable);
@@ -17,7 +24,7 @@ export class Switch {
     return this;
   }
 
-  do(fn){
+  do(fn:Function):Switch {
     unless(this.state === 'break', () => {
       const newState = this.condition && fn ? 'success' : 'abort';
       unless(this.state === 'pipeline', () => this.setState(newState));
@@ -26,24 +33,16 @@ export class Switch {
     return this;
   }
 
-  execute(fn){
-    if(this.state === 'success' || this.state === 'pipeline'){
-      const args = this.getArguments();
-      fn(args);
-    }
-    return this;
-  }
-
-  else(fn) {
-    if(this.state !== 'break' && this.state !== 'pipeline'){
+  else(fn:Function):Switch {
+    if (this.state !== 'break' && this.state !== 'pipeline') {
       this.predicate = null;
       this.setState('fallback');
-      if(fn && this.parse) fn(this.parse.bind(this))
+      if (fn && this.parse) fn(this.parse.bind(this));
     }
     return this;
   }
 
-  pipe(value){
+  pipe(value:any):Switch {
     unless(this.state === 'break', () => {
       this.setState('pipeline');
       this.value = value || this.value;
@@ -51,38 +50,44 @@ export class Switch {
     return this;
   }
 
-  parse(value){
+  parse(value:any):Switch {
     unless(this.state === 'break', () => {
       this.setState('parsing');
-      this.value = this.break(value, this.value)
+      this.value = this.break(value, this.value);
     });
     return this;
   }
 
-  break(newValue, oldValue){
+  private break(newValue:any, oldValue:any):any {
     this.setState('break');
     return newValue !== oldValue ? newValue : oldValue;
   }
 
-  setState(state){
-    this.state = state || this.state;
-    console.warn('state', this.state);
+  private execute(fn:Function):Switch {
+    if (this.state === 'success' || this.state === 'pipeline') {
+      const args = this.getArguments();
+      fn(args);
+    }
+    return this;
   }
 
-  getPredicate(condition, variable){
+  private setState(state:string):void {
+    this.state = state || this.state;
+    this.debug ? console.warn('state', this.state) : undefined;
+  }
+
+  private getPredicate(condition :any, variable : any):any {
     return condition === variable
       ? condition : isFunction(condition)
-        ? condition(variable) : eval(condition);
+        ? condition(variable) : condition;
   }
 
-  getArguments(){
+  private getArguments():Switch {
     return Object.assign({}, this, {
       pipe: this.pipe.bind(this),
-      parse: this.parse.bind(this)
+      parse: this.parse.bind(this),
     });
   }
 }
 
-Switch.of = (variable) => new Switch(variable);
-
-export default { Switch };
+export default Switch;

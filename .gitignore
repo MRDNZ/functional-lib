@@ -1,2 +1,4 @@
+lib
+.vscode
 node_modules
 bower_modules

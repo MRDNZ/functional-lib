@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "../ts",
+    "outDir": "../lib/",
     "module": "commonjs",
     "target": "es2015",
     "lib": [
@@ -10,14 +10,13 @@
       "es2015",
       "dom"
     ],
-    "jsx": "react",
     "allowJs": false,
     "sourceMap": true,
     "declaration": true,
     "moduleResolution": "node",
     "noImplicitReturns": true,
-    "noImplicitThis": true,
     "noImplicitAny": true,
+    "noImplicitThis": false,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true
@@ -26,6 +25,7 @@
     "node_modules",
     "bower_modules",
     "config",
-    "examples"
+    "examples",
+    "**/tempCodeRunnerFile.*"
   ]
 }
