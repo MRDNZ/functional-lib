@@ -1,5 +1,5 @@
 export const forEach = (arr:any[], fn:Function):void => {
-  for (const item of arr) fn(item);
+  for (const index in arr) fn(arr[index], index);
 };
 
 export const forEachObject = (obj:Object, fn:Function):void => {
@@ -20,9 +20,10 @@ export const some = (arr:any[], fn:Function):boolean => {
   return result;
 };
 
-export const sortBy = (property:string):((a:Object, b:Object) => number) =>
-  (a:Object, b:Object):number => (a[property] < b[property])
-    ? -1 : (a[property] > b[property]) ? 1 : 0;
+export const sortBy = (property:string, order?:string):((a:Object, b:Object) => number) =>
+  (a:Object, b:Object):number => order === 'ASC'
+    ? (a[property] > b[property]) ? -1 : (a[property] < b[property]) ? 1 : 0
+    : (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
 
 export const closure = (variable:string):Function =>
   (fn:Function):any => fn(variable);
@@ -43,6 +44,8 @@ export const memoized = (fn:Function):any => {
   const storeObj = {};
   return (arg:any) => storeObj[arg] || (storeObj[arg] = fn(arg));
 };
+
+export const random = (arr:any[]):any => arr[Math.floor(Math.random() * arr.length)];
 
 export const map = (arr:any[], fn:Function):any[] => {
   const results:any[] = [];
@@ -104,7 +107,10 @@ export const compose = (...fns:Function[]):Function => (value:any):Function[] =>
 export const pipe = (...fns:Function[]):Function => (value:any):Function[] =>
   reduce(fns, (acc:any, fn:Function) => fn(acc), value);
 
-export const identity = (it:any):any => console.log(it) && it;
+export const identity = (it:any):any => {
+  console.log(it);
+  return it;
+};
 
 export const isFunction = (variable:any):boolean =>
   (typeof variable === 'function' || variable instanceof Function);
