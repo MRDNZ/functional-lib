@@ -1,6 +1,6 @@
 {
   "name": "functional-lib",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Functional Javascript library",
   "main": "./lib/index.js",
   "scripts": {
@@ -8,16 +8,30 @@
     "build-dev": "webpack --config ./config/webpack.dev.js --watch",
     "build-prod": "webpack --config ./config/webpack.prod.js",
     "examples": "ts-node examples/ts/functional-example.ts && ts-node examples/ts/switch-example.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start config/karma.conf.js"
   },
+  "pre-commit": [
+    "test"
+  ],
   "author": "Maarten Zwitser",
   "license": "ISC",
   "devDependencies": {
+    "@types/jasmine": "^2.6.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "clean-webpack-plugin": "^0.1.17",
+    "jasmine-core": "^2.8.0",
+    "karma": "^1.7.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-spec-reporter": "0.0.31",
+    "karma-typescript": "^3.0.7",
+    "karma-webpack": "^2.0.5",
+    "pre-commit": "^1.2.2",
     "ts-loader": "^2.3.7",
     "ts-node": "^3.3.0",
     "tslint": "^5.7.0",
