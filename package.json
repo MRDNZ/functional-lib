@@ -1,6 +1,6 @@
 {
   "name": "functional-lib",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.4.1",
   "description": "Functional Javascript library",
   "main": "./lib/index.js",
   "scripts": {

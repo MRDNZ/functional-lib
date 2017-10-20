@@ -3,6 +3,13 @@
 src
 test
 config
+public
 coverage
+examples
 node_modules
 bower_modules
+
+tslint.json
+tsconfig.json
+tsconfig.karma.json
+package.json
