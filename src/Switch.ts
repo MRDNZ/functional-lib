@@ -37,7 +37,8 @@ export class Switch {
     if (this.state !== 'break' && this.state !== 'pipeline') {
       this.predicate = null;
       this.setState('fallback');
-      if (fn && this.parse) fn(this.parse.bind(this));
+      const parse = this.parse.bind(this);
+      if (isFunction(fn)) fn(parse);
     }
     return this;
   }
@@ -45,7 +46,7 @@ export class Switch {
   pipe(value:any):Switch {
     unless(this.state === 'break', () => {
       this.setState('pipeline');
-      this.value = value || this.value;
+      this.value = value;
     });
     return this;
   }
@@ -53,14 +54,14 @@ export class Switch {
   parse(value:any):Switch {
     unless(this.state === 'break', () => {
       this.setState('parsing');
-      this.value = this.break(value, this.value);
+      this.value = this.break(value);
     });
     return this;
   }
 
-  private break(newValue:any, oldValue:any):any {
+  private break(newValue:any):any {
     this.setState('break');
-    return newValue !== oldValue ? newValue : oldValue;
+    return newValue;
   }
 
   private execute(fn:Function):Switch {
@@ -72,8 +73,8 @@ export class Switch {
   }
 
   private setState(state:string):void {
-    this.state = state || this.state;
-    this.debug ? console.warn('state', this.state) : undefined;
+    this.state = state;
+    if (this.debug) console.log('state', this.state);
   }
 
   private getPredicate(condition :any, variable : any):any {

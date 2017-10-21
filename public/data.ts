@@ -33,6 +33,14 @@ export const users:IUser[] = [
     gender: 'female',
   },
   {
+    id: '59e354bcc67f5e0c2d586223',
+    isActive: false,
+    age: 19,
+    firstname: 'Manuela',
+    lastname: 'Joyce',
+    gender: 'female',
+  },
+  {
     id: '59e354bc93f4b7a46a15139d',
     isActive: false,
     age: 38,

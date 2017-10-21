@@ -5,7 +5,7 @@ import {
   reviews, IReviewDetail,
 } from '../public/data';
 
-import * as Functional from '../src';
+import * as Functional from '../src/Functional';
 
 
 describe('log', () => {
@@ -332,6 +332,15 @@ describe('partial', () => {
 
     delayFn(() => callback());
     setTimeout(() => expect(callback).toHaveBeenCalled(), delay);
+  });
+
+  it('doesnt work if undefined is not defined', () => {
+    const delay = 1000;
+    const delayFn = partial(setTimeout, null, delay);
+    const callback = jasmine.createSpy('callback');
+
+    delayFn(() => callback());
+    setTimeout(() => expect(callback).not.toHaveBeenCalled(), delay);
   });
 });
 

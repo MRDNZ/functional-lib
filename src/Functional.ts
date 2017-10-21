@@ -3,7 +3,7 @@ export const forEach = (arr:any[], fn:Function):void => {
 };
 
 export const forEachObject = (obj:Object, fn:Function):void => {
-  for (const property in obj) if (obj.hasOwnProperty(property)) fn(property, obj[property]);
+  for (const property in obj) fn(property, obj[property]);
 };
 
 export const unless = (predicate:boolean, fn:Function):(boolean|any) => predicate || fn();
