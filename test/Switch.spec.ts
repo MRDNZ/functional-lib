@@ -79,17 +79,3 @@ describe('Switch', () => {
     expect(fallbackSwitch.value).toBeNull();
   });
 });
-
-// describe('log', () => {
-//   const log = Functional.log;
-
-//   it('can execute console methods', () => {
-//     const consoleMethods = ['clear', 'error', 'group', 'info', 'log', 'warn'];
-
-//     consoleMethods.forEach((method:any) => {
-//       spyOn(console, method);
-//       log(method, 'lorem ipsum');
-//       expect(console[method]).toHaveBeenCalledWith('lorem ipsum');
-//     });
-//   });
-// });
