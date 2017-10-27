@@ -317,7 +317,7 @@ describe('curry', () => {
   });
 
   it('throws an error if no function is provided', () => {
-    const errorMessage = 'No function prodived';
+    const errorMessage = 'No function provided';
     expect(curry).toThrowError(errorMessage);
   });
 });

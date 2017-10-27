@@ -79,7 +79,7 @@ export const zip = (leftArr:any[], rightArr:any[], fn:Function):any[] => {
 };
 
 export const curry = (fn:Function):Function => {
-  if (!isFunction(fn)) throw Error('No function prodived');
+  if (!isFunction(fn)) throw Error('No function provided');
   return function curriedFn(...args:any[]):(Function|any) {
     if (args.length < fn.length) {
       return function ():any {

@@ -13,3 +13,4 @@ tslint.json
 tsconfig.json
 tsconfig.karma.json
 package.json
+CONTRIBUTING.md
