@@ -3,7 +3,7 @@
 
 ![Version](https://img.shields.io/badge/build-passing-brightgreen.svg)
 ![Version](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)
-![Version](https://img.shields.io/badge/release-v1.0.0--beta.1-blue.svg)
+![Version](https://img.shields.io/badge/release-v1.0.1-blue.svg)
 
 Functional Javascript library with Typescript support. You can use this library to solve the most common problems you're facing while developing.
 
